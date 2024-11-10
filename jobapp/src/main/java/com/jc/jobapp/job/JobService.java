@@ -7,5 +7,5 @@ public interface JobService {
     Job createJob(Job job);
     Job getJobById(Long id);
     Job updateJob(Long id, Job input);
-    Job deleteJobById(Long id);
+    boolean deleteJobById(Long id);
 }
