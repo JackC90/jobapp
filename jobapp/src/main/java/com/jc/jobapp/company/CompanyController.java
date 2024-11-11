@@ -1,7 +1,5 @@
 package com.jc.jobapp.company;
-// import com.jc.jobapp.job.Job;
-
-import org.springframework.web.bind.annotation.RestController;
+// import com.jc.jobapp.company.Company;
 
 import java.util.List;
 
@@ -14,42 +12,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/companies")
 public class CompanyController {
-    private CompanyService jobService;
+    private final CompanyService companyService;
 
-    public CompanyController(CompanyService jobService) {
-        this.jobService = jobService;
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
     }
 
     @GetMapping
     public ResponseEntity<List<Company>> findAll() {
-        return ResponseEntity.ok(jobService.findAll());
+        return ResponseEntity.ok(companyService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Company> createJob(@RequestBody Company job) {
-        Company res = jobService.createJob(job);
+    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+        Company res = companyService.createCompany(company);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getJobById(@PathVariable Long id) {
-        Company job = jobService.getJobById(id);
+    public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
+        Company company = companyService.getCompanyById(id);
 
-        if (job != null) {
-            return new ResponseEntity<>(job, HttpStatus.OK);
+        if (company != null) {
+            return new ResponseEntity<>(company, HttpStatus.OK);
         }
-        return new ResponseEntity<>(job, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(company, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Company> updateJob(@PathVariable Long id, @RequestBody Company input) {
-        Company updated = jobService.updateJob(id, input);
+    public ResponseEntity<Company> updateCompany(@PathVariable Long id, @RequestBody Company input) {
+        Company updated = companyService.updateCompany(id, input);
         if (updated != null) {
             return new ResponseEntity<>(updated, HttpStatus.OK);
         }
@@ -58,10 +56,10 @@ public class CompanyController {
     
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Company> deleteJobById(@PathVariable Long id) {
-        boolean job = jobService.deleteJobById(id);
+    public ResponseEntity<Company> deleteCompanyById(@PathVariable Long id) {
+        boolean company = companyService.deleteCompanyById(id);
 
-        if (!job) {
+        if (!company) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

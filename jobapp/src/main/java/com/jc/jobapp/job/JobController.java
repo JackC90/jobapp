@@ -1,8 +1,6 @@
 package com.jc.jobapp.job;
 // import com.jc.jobapp.job.Job;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -14,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 @RequestMapping("/jobs")
 public class JobController {
-    private CompanyService jobService;
+    private final JobService jobService;
 
-    public JobController(CompanyService jobService) {
+    public JobController(JobService jobService) {
         this.jobService = jobService;
     }
 

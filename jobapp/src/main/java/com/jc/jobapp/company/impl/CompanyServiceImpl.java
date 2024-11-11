@@ -2,60 +2,57 @@ package com.jc.jobapp.company.impl;
 
 import java.util.List;
 import java.util.Optional;
-import com.jc.jobapp.job.Job;
-import com.jc.jobapp.job.JobRepository;
+import com.jc.jobapp.company.Company;
+import com.jc.jobapp.company.CompanyRepository;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.stereotype.Service;
 
-import com.jc.jobapp.job.JobService;
+import com.jc.jobapp.company.CompanyService;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    CompanyRepository jobRepository;
+    CompanyRepository companyRepository;
     private Long nextId = 1L;
 
-    public CompanyServiceImpl(CompanyRepository jobRepository) {
-        this.jobRepository = jobRepository;
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
     }
 
     @Override
-    public List<Job> findAll() {
-        return jobRepository.findAll();
+    public List<Company> findAll() {
+        return companyRepository.findAll();
     }
 
     @Override
-    public Job createJob(@RequestBody Job job) {
-        job.setId(nextId++);
-        jobRepository.save(job);
-        return job;
+    public Company createCompany(@RequestBody Company company) {
+        company.setId(nextId++);
+        companyRepository.save(company);
+        return company;
     }
 
     @Override
-    public Job getJobById(Long id) {
-        return jobRepository.findById(id).orElse( null);
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).orElse( null);
     }
 
     @Override
-    public Job updateJob(Long id, Job input) {
-        Optional<Job> jobOptional = jobRepository.findById(id);
+    public Company updateCompany(Long id, Company input) {
+        Optional<Company> jobOptional = companyRepository.findById(id);
 
         if (jobOptional.isPresent()) {
-            Job job = jobOptional.get();
-            job.setTitle(input.getTitle());
-            job.setDescription(input.getDescription());
-            job.setMinSalary(input.getMinSalary());
-            job.setMaxSalary(input.getMaxSalary());
-            job.setLocation(input.getLocation());
-            return job;
+            Company company = jobOptional.get();
+            company.setName(input.getName());
+            company.setDescription(input.getDescription());
+            return company;
         }
         return null;
     }
 
     @Override
-    public boolean deleteJobById(Long id) {
+    public boolean deleteCompanyById(Long id) {
         try {
-            jobRepository.deleteById(id);
+            companyRepository.deleteById(id);
             return true;
         } catch (Exception e) {
             return false;
