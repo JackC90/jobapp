@@ -33,7 +33,6 @@ public class JobController {
     @PostMapping
     public ResponseEntity<Job> createJob(@RequestBody Job job) {
         Job res = jobService.createJob(job);
-        Company company = job.getCompany();
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
