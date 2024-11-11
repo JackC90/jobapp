@@ -2,12 +2,12 @@ package com.jc.jobapp.job.impl;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.jc.jobapp.job.Job;
 import com.jc.jobapp.job.JobRepository;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.stereotype.Service;
-
 import com.jc.jobapp.job.JobService;
 
 @Service
@@ -47,6 +47,7 @@ public class JobServiceImpl implements JobService {
             job.setMinSalary(input.getMinSalary());
             job.setMaxSalary(input.getMaxSalary());
             job.setLocation(input.getLocation());
+            jobRepository.save(job);
             return job;
         }
         return null;

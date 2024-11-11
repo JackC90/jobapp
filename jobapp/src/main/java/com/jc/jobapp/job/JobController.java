@@ -1,6 +1,5 @@
 package com.jc.jobapp.job;
 // import com.jc.jobapp.job.Job;
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jc.jobapp.company.Company;
 
 
 @RestController
@@ -32,7 +33,8 @@ public class JobController {
     @PostMapping
     public ResponseEntity<Job> createJob(@RequestBody Job job) {
         Job res = jobService.createJob(job);
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        Company company = job.getCompany();
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

@@ -44,6 +44,8 @@ public class CompanyServiceImpl implements CompanyService {
             Company company = jobOptional.get();
             company.setName(input.getName());
             company.setDescription(input.getDescription());
+            company.setJobs(input.getJobs());
+            companyRepository.save(company);
             return company;
         }
         return null;
