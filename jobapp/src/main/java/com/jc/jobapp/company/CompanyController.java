@@ -1,4 +1,4 @@
-package com.jc.jobapp.job;
+package com.jc.jobapp.company;
 // import com.jc.jobapp.job.Job;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -19,27 +19,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/jobs")
-public class JobController {
+public class CompanyController {
     private CompanyService jobService;
 
-    public JobController(CompanyService jobService) {
+    public CompanyController(CompanyService jobService) {
         this.jobService = jobService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Job>> findAll() {
+    public ResponseEntity<List<Company>> findAll() {
         return ResponseEntity.ok(jobService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Job> createJob(@RequestBody Job job) {
-        Job res = jobService.createJob(job);
+    public ResponseEntity<Company> createJob(@RequestBody Company job) {
+        Company res = jobService.createJob(job);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable Long id) {
-        Job job = jobService.getJobById(id);
+    public ResponseEntity<Company> getJobById(@PathVariable Long id) {
+        Company job = jobService.getJobById(id);
 
         if (job != null) {
             return new ResponseEntity<>(job, HttpStatus.OK);
@@ -48,8 +48,8 @@ public class JobController {
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job input) {
-        Job updated = jobService.updateJob(id, input);
+    public ResponseEntity<Company> updateJob(@PathVariable Long id, @RequestBody Company input) {
+        Company updated = jobService.updateJob(id, input);
         if (updated != null) {
             return new ResponseEntity<>(updated, HttpStatus.OK);
         }
@@ -58,7 +58,7 @@ public class JobController {
     
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Job> deleteJobById(@PathVariable Long id) {
+    public ResponseEntity<Company> deleteJobById(@PathVariable Long id) {
         boolean job = jobService.deleteJobById(id);
 
         if (!job) {
