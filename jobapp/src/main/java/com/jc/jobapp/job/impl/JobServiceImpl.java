@@ -13,7 +13,6 @@ import com.jc.jobapp.job.JobService;
 @Service
 public class JobServiceImpl implements JobService {
     JobRepository jobRepository;
-    private Long nextId = 1L;
 
     public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
@@ -26,7 +25,6 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job createJob(@RequestBody Job job) {
-        job.setId(nextId++);
         jobRepository.save(job);
         return job;
     }

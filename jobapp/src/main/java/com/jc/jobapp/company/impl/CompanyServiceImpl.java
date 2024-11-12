@@ -2,18 +2,17 @@ package com.jc.jobapp.company.impl;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.jc.jobapp.company.Company;
 import com.jc.jobapp.company.CompanyRepository;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.stereotype.Service;
-
 import com.jc.jobapp.company.CompanyService;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
     CompanyRepository companyRepository;
-    private Long nextId = 1L;
 
     public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -26,7 +25,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company createCompany(@RequestBody Company company) {
-        company.setId(nextId++);
         companyRepository.save(company);
         return company;
     }
