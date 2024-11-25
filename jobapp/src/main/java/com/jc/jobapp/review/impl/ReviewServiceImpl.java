@@ -29,7 +29,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review addReview(Long companyId, Review review) {
-        Company company = companyService.getCompanyById(companyId)
+        Company company = companyService.getCompanyById(companyId);
         if (company != null) {
             review.setCompany(company);
             reviewRepository.save(review);

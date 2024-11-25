@@ -3,16 +3,20 @@ services:
         container_name: postgres_container
         image: postgres
         environment:
-            POSTGRES_USER: embarx
-            POSTGRES_PASSWORD: embarx
+            POSTGRES_USER: embarkx
+            POSTGRES_PASSWORD: embarkx
+            POSTGRES_DB: jobapp
             PGDATA: /data/postgres
         volumes:
             - postgres:/data/postgres
+        expose:
+            - "5433"
         ports:
-            - "5432:5432"
+            - "5433:5433"
         networks:
             - postgres
         restart: unless-stopped
+        command: -p 5433
     
     pgadmin:
         container_name: pgadmin_container
